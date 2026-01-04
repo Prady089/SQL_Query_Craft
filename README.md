@@ -104,6 +104,62 @@ python -m uvicorn app:app --reload --port 8000
 python chatbot_ui.py
 ```
 
+## Clone & Try Locally
+
+Anyone can clone this repo and run the demo locally.
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Prady089/SQL_Query_Craft.git
+cd SQL_Query_Craft
+```
+
+2. Copy the example env and set your OpenAI key:
+
+```powershell
+copy .env.example .env
+# then open .env and paste your OPENAI_API_KEY value
+```
+
+3. (Optional) Create and activate a virtualenv, then install deps:
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+4. Seed the demo DB (creates `demo.db`):
+
+```powershell
+python seed_db.py
+```
+
+5. Start both services (recommended):
+
+```powershell
+python launch.py
+```
+
+Or run the API and UI separately as shown above.
+
+## Run Tests Locally
+
+You can run the health test locally to sanity-check the app:
+
+```powershell
+# ensure .env is set or OPENAI_API_KEY in env
+pytest -q
+```
+
+If pytest cannot import `app`, ensure you're running from the repo root and that `.venv` is activated (or set `PYTHONPATH`):
+
+```powershell
+$Env:PYTHONPATH = "$PWD"
+pytest -q
+```
+
 ## Docker
 
 You can run the backend in Docker for easier demos or deployment.
