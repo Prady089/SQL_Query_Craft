@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: sqlqc_api
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    ports:
+      - "8000:8000"
+    command: uvicorn app:app --host 0.0.0.0 --port 8000
+
+  ui:
+    build: .
+    container_name: sqlqc_ui
+    environment:
+      - API_URL=http://api:8000/chat
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    ports:
+      - "7860:7860"
+    command: python chatbot_ui.py

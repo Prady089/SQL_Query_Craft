@@ -122,6 +122,30 @@ docker run -e OPENAI_API_KEY="your-key" -p 8000:8000 sql-query-craft:latest
 
 The container exposes the API on port 8000. For local demos, keep the Gradio UI running outside the container and point `API_URL` to `http://host.docker.internal:8000/chat` (Windows/Mac) or the correct host IP on Linux.
 
+## Docker Compose
+
+A `docker-compose.yml` is included to run both the API and Gradio UI together as containers. The services are built from the same image; the UI container is configured to call the API service by its Compose DNS name.
+
+Bring the services up (ensure `OPENAI_API_KEY` is set in your shell or a `.env` file):
+
+```powershell
+docker-compose up --build
+```
+
+This exposes:
+- API: http://localhost:8000/health
+- UI:  http://localhost:7860
+
+To stop:
+
+```powershell
+docker-compose down
+```
+
+Notes:
+- For production, use a proper secret store for `OPENAI_API_KEY` and a dedicated database service (Postgres) instead of the built-in SQLite demo DB.
+- If you run Docker on Linux, update `API_URL` environment in the `docker-compose.yml` if necessary.
+
 ## CI (GitHub Actions)
 
 A workflow is included at `.github/workflows/ci.yml` that:
