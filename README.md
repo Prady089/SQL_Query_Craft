@@ -146,6 +146,21 @@ Notes:
 - For production, use a proper secret store for `OPENAI_API_KEY` and a dedicated database service (Postgres) instead of the built-in SQLite demo DB.
 - If you run Docker on Linux, update `API_URL` environment in the `docker-compose.yml` if necessary.
 
+### Local development (live reload)
+
+A `docker-compose.override.yml` is provided to mount the project directory into the containers and enable live reload for the backend. This lets you edit code on your host and see changes immediately without rebuilding the image.
+
+Run with the override (default Compose behavior loads `docker-compose.override.yml` automatically):
+
+```powershell
+docker-compose up --build
+```
+
+Notes:
+- The `api` service runs `uvicorn` with `--reload` so code changes restart the server inside the container.
+- The `ui` service runs the Gradio script from the mounted source; some UI frameworks hot-reload automatically, otherwise restart the `ui` container if needed.
+- To develop against a host OpenAI key without embedding it in the file, use a local `.env` with `OPENAI_API_KEY=your-key` and run `docker-compose up --build`.
+
 ## CI (GitHub Actions)
 
 A workflow is included at `.github/workflows/ci.yml` that:
