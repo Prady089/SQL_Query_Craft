@@ -34,15 +34,3 @@ jobs:
           OPENAI_API_KEY: test
         run: |
           pytest -q
-
-      - name: Build Docker image
-        run: |
-          docker build -t sql-query-craft:ci .
-
-      - name: Run container and health-check
-        run: |
-          docker run -d --name sqlqc -p 8000:8000 sql-query-craft:ci || true
-          sleep 3
-          curl -fsS http://localhost:8000/health
-          docker stop sqlqc || true
-          docker rm sqlqc || true

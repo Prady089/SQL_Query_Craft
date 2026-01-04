@@ -160,70 +160,11 @@ $Env:PYTHONPATH = "$PWD"
 pytest -q
 ```
 
-## Docker
-
-You can run the backend in Docker for easier demos or deployment.
-
-Build the image:
-
-```powershell
-docker build -t sql-query-craft:latest .
-```
-
-Run the container (remember to set a real OpenAI key for production):
-
-```powershell
-docker run -e OPENAI_API_KEY="your-key" -p 8000:8000 sql-query-craft:latest
-```
-
-The container exposes the API on port 8000. For local demos, keep the Gradio UI running outside the container and point `API_URL` to `http://host.docker.internal:8000/chat` (Windows/Mac) or the correct host IP on Linux.
-
-## Docker Compose
-
-A `docker-compose.yml` is included to run both the API and Gradio UI together as containers. The services are built from the same image; the UI container is configured to call the API service by its Compose DNS name.
-
-Bring the services up (ensure `OPENAI_API_KEY` is set in your shell or a `.env` file):
-
-```powershell
-docker-compose up --build
-```
-
-This exposes:
-- API: http://localhost:8000/health
-- UI:  http://localhost:7860
-
-To stop:
-
-```powershell
-docker-compose down
-```
-
-Notes:
-- For production, use a proper secret store for `OPENAI_API_KEY` and a dedicated database service (Postgres) instead of the built-in SQLite demo DB.
-- If you run Docker on Linux, update `API_URL` environment in the `docker-compose.yml` if necessary.
-
-### Local development (live reload)
-
-A `docker-compose.override.yml` is provided to mount the project directory into the containers and enable live reload for the backend. This lets you edit code on your host and see changes immediately without rebuilding the image.
-
-Run with the override (default Compose behavior loads `docker-compose.override.yml` automatically):
-
-```powershell
-docker-compose up --build
-```
-
-Notes:
-- The `api` service runs `uvicorn` with `--reload` so code changes restart the server inside the container.
-- The `ui` service runs the Gradio script from the mounted source; some UI frameworks hot-reload automatically, otherwise restart the `ui` container if needed.
-- To develop against a host OpenAI key without embedding it in the file, use a local `.env` with `OPENAI_API_KEY=your-key` and run `docker-compose up --build`.
-
 ## CI (GitHub Actions)
 
 A workflow is included at `.github/workflows/ci.yml` that:
 - installs dependencies and seeds the demo DB,
-- runs `pytest`,
-- builds the Docker image and performs a simple health check.
-
+- runs `pytest`.
 
 ## API
 
@@ -254,7 +195,7 @@ Suggested improvements to move toward production:
 - Swap SQLite for Postgres or another production RDBMS and use a connection pool.
 - Add user authentication + RBAC for data access controls.
 - Harden SQL validation with `sqlglot` or a proper parser and implement table/column allowlists.
-- Containerize with Docker and add CI/CD (GitHub Actions) to lint, test, and build images.
+- Add CI/CD (GitHub Actions) to lint, test, and deploy.
 - Add request rate limits and monitoring (Prometheus/Grafana).
 
 ## Commercial Use & Product Ideas
