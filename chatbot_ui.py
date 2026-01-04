@@ -69,9 +69,10 @@ Prompted with OpenAI → SQLite demo. Chat on the first tab; schema reference on
                     btn4 = gr.Button(SAMPLE_PROMPTS[3])
                     btn5 = gr.Button(SAMPLE_PROMPTS[4])
                 
+                # Place Ask button directly below sample prompts for easy access
+                submit_btn = gr.Button("Ask", variant="primary")
                 sql_output = gr.Code(label="Generated SQL", language="sql", lines=4)
                 summary_output = gr.Textbox(lines=10, label="Insights (Natural Language)")
-                submit_btn = gr.Button("Ask", variant="primary")
                 
                 # Wire up sample prompt buttons
                 btn1.click(fn=ask, inputs=gr.Textbox(value=SAMPLE_PROMPTS[0], visible=False), outputs=[sql_output, summary_output])
