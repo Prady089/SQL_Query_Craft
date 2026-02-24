@@ -4,35 +4,8 @@
 
 SQL Query Craft is an intelligent chatbot application that bridges the gap between natural language and database queries. Built with modern Python frameworks and powered by OpenAI's language models, it enables users to interact with databases using plain English, eliminating the need for SQL expertise.
 
----
+<img width="1906" height="824" alt="image" src="https://github.com/user-attachments/assets/430ac914-2c96-401f-a5ce-e4dea5271645" />
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Demo & Use Cases](#demo--use-cases)
-- [Architecture](#architecture)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Configuration](#configuration)
-  - [Running the Application](#running-the-application)
-- [API Documentation](#api-documentation)
-- [Database Schema](#database-schema)
-- [How It Works](#how-it-works)
-- [Testing](#testing)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Security & Safety](#security--safety)
-- [Production Deployment](#production-deployment)
-- [Limitations & Caveats](#limitations--caveats)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [Commercial Opportunities](#commercial-opportunities)
-- [License](#license)
-
----
 
 ## 🎯 Overview
 
